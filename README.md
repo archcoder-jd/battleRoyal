@@ -47,3 +47,26 @@ Continue Game?
 ```
 
 Choose `1` to load the saved battle, or `2` to start a new one. If `gameSave.txt` is empty, choose `2`.
+
+### 2. Set up the battle
+
+For a new game you will be asked to:
+
+1. **Pick a terrain.** Your choice is pooled with a random terrain, and one of the two is used at random.
+2. **Pick your warrior** (Human, Elf or Orc).
+3. **Pick your weapon** (Dagger, Sword or Axe).
+4. **Pick your armour** (Leather, Chainmail or Platemail).
+
+The weather is chosen at random. The enemy's warrior, weapon and armour are also chosen at random.
+
+### 3. Fight
+
+Turns alternate between you and the enemy. On your turn, pick an attack:
+
+```
+1) Light
+2) Heavy
+3) Save & Quit
+```
+
+Heavy attacks deal more damage than light attacks. The enemy picks light or heavy at random on its turn. The first side to reduce the other's health to zero or below wins.
