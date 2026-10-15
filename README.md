@@ -70,3 +70,57 @@ Turns alternate between you and the enemy. On your turn, pick an attack:
 ```
 
 Heavy attacks deal more damage than light attacks. The enemy picks light or heavy at random on its turn. The first side to reduce the other's health to zero or below wins.
+
+## Game mechanics
+
+### Warriors
+
+Starting stats are rolled randomly within these ranges when a new warrior is created.
+
+| Warrior | Health   | Strength | Dexterity |
+|---------|----------|----------|-----------|
+| Human   | 75–149   | 50–99    | 50–99     |
+| Elf     | 50–99    | 40–69    | 90–164    |
+| Orc     | 120–209  | 200–274  | 30–44     |
+
+### Weapons
+
+| Weapon | Base damage | Dexterity cost |
+|--------|-------------|----------------|
+| Dagger | 50          | 10             |
+| Sword  | 100         | 40             |
+| Axe    | 180         | 80             |
+
+### Armour
+
+Armour reduces the damage you take from each hit.
+
+| Armour     | Damage reduction | Dexterity cost |
+|------------|------------------|----------------|
+| Leather    | 10               | 5              |
+| Chainmail  | 50               | 30             |
+| Platemail  | 100              | 70             |
+
+### Terrain and weather
+
+Terrain and weather add to the difficulty of landing a hit (their dexterity cost is rolled when the battle is created).
+
+| Terrain | Dexterity cost |
+|---------|----------------|
+| Ground  | 1–3            |
+| Hill    | 4–6            |
+| Sand    | 7–12           |
+
+| Weather | Dexterity cost |
+|---------|----------------|
+| Calm    | 1–3            |
+| Windy   | 2–7            |
+| Stormy  | 10–20          |
+
+### Combat
+
+Each attack is resolved in three steps:
+
+1. **Hit roll.** A number from 1 to 100 is rolled. Each weapon starts from its own base hit target (45 for a Dagger, 57 for a Sword, 65 for an Axe). That target is lowered by the attacker's dexterity and raised by the dexterity costs of the attacker's weapon and armour, plus the terrain and weather costs. The attack hits if the roll is greater than or equal to the target. Higher dexterity makes hits more likely; heavier gear and harsher conditions make them less likely.
+2. **Damage.** On a hit, damage is the weapon's base damage plus a strength bonus plus an attack bonus. The attack bonus is larger for heavy attacks. Heavy attacks add damage but do not change the hit chance.
+3. **Armour.** The defender's armour value is subtracted from the damage. If nothing gets through, the attack does no damage.
