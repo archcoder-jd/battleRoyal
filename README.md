@@ -33,3 +33,17 @@ Run the game from the same folder. The save file is read and written as a relati
 ```bash
 java Battle
 ```
+
+## How to play
+
+### 1. Continue or start fresh
+
+If a save file exists, you are asked:
+
+```
+Continue Game?
+1) Yes
+2) No
+```
+
+Choose `1` to load the saved battle, or `2` to start a new one. If `gameSave.txt` is empty, choose `2`.
