@@ -1,6 +1,6 @@
 # battleRoyal
 
-A turn-based, You pick a warrior, a weapon, and armour and fight the enemy in a randomly chosen arena with random weather. It is a version of the Warsim game.
+A text-based battle game written in Java. You pick a warrior, a weapon, and armour and fight the enemy in a randomly chosen arena with random weather. It is a version of the Warsim game.
 
 ## Features
 
@@ -124,3 +124,59 @@ Each attack is resolved in three steps:
 1. **Hit roll.** A number from 1 to 100 is rolled. Each weapon starts from its own base hit target (45 for a Dagger, 57 for a Sword, 65 for an Axe). That target is lowered by the attacker's dexterity and raised by the dexterity costs of the attacker's weapon and armour, plus the terrain and weather costs. The attack hits if the roll is greater than or equal to the target. Higher dexterity makes hits more likely; heavier gear and harsher conditions make them less likely.
 2. **Damage.** On a hit, damage is the weapon's base damage plus a strength bonus plus an attack bonus. The attack bonus is larger for heavy attacks. Heavy attacks add damage but do not change the hit chance.
 3. **Armour.** The defender's armour value is subtracted from the damage. If nothing gets through, the attack does no damage.
+
+## Save file
+
+Choosing **Save & Quit** (option `3`) on your turn writes the current battle to `gameSave.txt`. The file has eight comma-separated lines, in this order:
+
+| Line | Contents                                      |
+|------|-----------------------------------------------|
+| 1    | Player warrior: type, health, strength, dexterity |
+| 2    | Enemy warrior: type, health, strength, dexterity  |
+| 3    | Player weapon: type, damage, dexterity cost       |
+| 4    | Enemy weapon: type, damage, dexterity cost        |
+| 5    | Player armour: type, armour value, dexterity cost |
+| 6    | Enemy armour: type, armour value, dexterity cost  |
+| 7    | Terrain: type, dexterity cost                 |
+| 8    | Weather: type, dexterity cost                 |
+
+Type codes:
+
+- Warriors: `1` Human, `2` Elf, `3` Orc
+- Weapons: `1` Dagger, `2` Sword, `3` Axe
+- Armour: `1` Leather, `2` Chainmail, `3` Platemail
+- Terrain: `1` Ground, `2` Hill, `3` Sand
+- Weather: `1` Calm, `2` Windy, `3` Stormy
+
+`sampleData.txt` shows an example save file.
+
+## Project structure
+
+```
+battleRoyal/
+├── Battle.java          # Entry point: game loop, setup, save and load
+├── armour/              # Armour (abstract), Leather, Chainmail, Platemail
+├── terrain/             # Terrain (abstract), Ground, Hill, Sand
+├── utility/             # Printer (all console output) and Validator (menu input)
+├── warrior/             # Warrior (abstract), Human, Elf, Orc
+├── weapon/              # Weapon (abstract), Dagger, Sword, Axe
+├── weather/             # Weather (abstract), Calm, Windy, Stormy
+├── gameSave.txt         # Save file written by Save & Quit
+├── sampleData.txt       # Example save file
+└── LICENSE              # MIT
+```
+
+Each category has an abstract base class. Each concrete class sets its own stats and implements its own `strike` method, where weapons define their hit-chance formula.
+
+## Known issues
+
+- **Save & Quit still asks "Play again?"** After saving and quitting, the game shows the play-again prompt. Answering `2` ends the program.
+- **Empty save file.** Answering `1` (Yes) to "Continue Game?" when `gameSave.txt` is empty does not start a battle. Answer `2` instead.
+- **Working directory.** The save file path is relative, so run the game from the project root.
+- **String comparisons.** Some checks compare strings with `==` (for example `turn == "Player"`). This works for the literal values used here, but `.equals` would be safer.
+- **Compiled files are committed.** The `.class` files and `.DS_Store` are tracked in the repository. Adding a `.gitignore` would keep them out.
+- **Music is disabled.** The music-player code in `Battle.java` is commented out.
+
+## License
+
+Released under the MIT License
