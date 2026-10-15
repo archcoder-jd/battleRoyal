@@ -19,3 +19,17 @@ A turn-based, You pick a warrior, a weapon, and armour and fight the enemy in a 
 ## Getting Started
 
 Clone the repository and compile from the project root:
+
+```bash
+git clone https://github.com/archcoder-jd/battleRoyal.git
+cd battleRoyal
+javac Battle.java
+```
+
+`javac` finds the packages (`armour`, `terrain`, `utility`, `warrior`, `weapon`, `weather`) in the subfolders automatically.
+
+Run the game from the same folder. The save file is read and written as a relative path, so starting the game from another directory will not find your save.
+
+```bash
+java Battle
+```
